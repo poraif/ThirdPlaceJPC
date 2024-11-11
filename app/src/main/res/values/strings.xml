@@ -1,0 +1,107 @@
+<resources>
+    <!-- Global -->
+    <string name="app_name">Third Place</string>
+    <string name="app_tagline">Find new shared spaces</string>
+
+    <!-- Text fields -->
+    <!-- Buttons -->
+    <string name="button_continue">Continue</string>
+    <string name="button_addPlace">Add place</string>
+    <string name="button_signup">Sign up</string>
+    <string name="button_login">Log in</string>
+    <string name="button_goBack">Back to map</string>
+    <string name="button_delete">Delete</string>
+    <string name="button_update">Update</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_addImage">Add image</string>
+    <string name="button_updateImage">Update image</string>
+    <string name="button_addLocation">Add location</string>
+
+
+    <!-- Menu -->
+    <string name="menu_addPlace">Add</string>
+    <string name="menu_cancel">Cancel</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_update">Update</string>
+    <string name="menu_logout">Logout</string>
+    <string name="menu_map">Map</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_about">About</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_login">Login</string>
+    <string name="menu_signup">Sign up</string>
+
+
+    <!-- Header messages -->
+    <string name="header_addPlace">Add place</string>
+    <string name="header_updatePlace">Update place</string>
+    <string name="header_login">Welcome back!</string>
+    <string name="header_signup">Sign up to Third Place</string>
+    <string name="header_map">ThirdPlace Map</string>
+    <string name="header_maps">All third places</string>
+    <string name="header_profile">Profile</string>
+    <string name="header_settings">Settings</string>
+    <string name="header_about">About Third Place</string>
+    <string name="header_loginSignup">Sign up or log in below</string>
+    <string name="header_savedPlaces">Saved places</string>
+    <string name="header_amenities">Select place amenities</string>
+    <string name="header_placeType">Select place type</string>
+
+
+    <!-- Hints -->
+    <string name="hint_placeTitle">Add place name here</string>
+    <string name="hint_placeDescription">Add place description here</string>
+    <string name="hint_userName">Joe Bloggs</string>
+    <string name="hint_userEmail">joebloggs@email.com</string>
+    <string name="hint_userPassword">Enter password here</string>
+    <string name="hint_selectImage">Select image</string>
+
+    <!-- Place Type radio button list -->
+    <string name="type_outdoors">Outdoors</string>
+    <string name="type_cultural">Cultural</string>
+    <string name="type_food">Food+drink</string>
+    <string name="type_activity">Activity</string>
+    <string name="type_community">Community space</string>
+
+    <!-- Amenities checkbox list -->
+    <string name="amenity_free">Free</string>
+    <string name="amenity_charging">Charging</string>
+    <string name="amenity_toilets">Toilets</string>
+    <string name="amenity_shelter">Shelter</string>
+    <string name="amenity_quiet">Quiet</string>
+    <string name="amenity_membership">Membership required</string>
+    <string name="amenity_laptop">Laptop friendly</string>
+    <string name="amenity_equipment">Equipment available</string>
+    <string name="amenity_alwaysOpen">Always open</string>
+
+    <!-- Error messages -->
+    <string name="error_titleTypeMissing">Title and type are required</string>
+    <string name="error_titleLength">Title must be less than 25 characters</string>
+    <string name="error_descriptionLength">Description must be less than 100 characters</string>
+    <string name="error_emptyFields">Please fill in all fields</string>
+    <string name="error_email">Please enter a valid email address</string>
+    <string name="error_password">Password does not match</string>
+    <string name="error_signup">Signup was unsuccessful.</string>
+    <string name="error_emailUsed">This email is already registered.</string>
+    <string name="error_login">Login was unsuccessful.</string>
+    <string name="error_emailNotFound">Email not found.</string>
+
+    <!-- Success messages -->
+    <string name="success_signup">Signup was successful.</string>
+    <string name="success_login">Login was successful.</string>
+    <string name="success_locationUpdate">Location was updated. Click back when finished.</string>
+
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="title_activity_login_view">LoginView</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+</resources>

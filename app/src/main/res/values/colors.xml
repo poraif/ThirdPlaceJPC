@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- app bars, buttons etc and text/icons overlaid on that -->
+    <color name="colorPrimary">#bd4f0b</color>
+    <color name="colorOnPrimary">#FFFFFFFF</color>
+
+    <!-- Other buttons and text -->
+    <color name="colorSecondary">#546e0c</color>
+    <color name="colorOnSecondary">#FFFFFFFF</color>
+
+    <!-- app background and text on background -->
+    <color name="colorBackground">#FFFFFFFF</color>
+    <color name="colorOnBackground">#1B3B48</color>
+
+    <!-- Elements on background and text overlaid on those elements -->
+    <color name="colorSurface">#1B3B48</color>
+    <color name="colorOnSurface">#FFFFFFFF</color>
+
+    <!-- Error messages -->
+    <color name="colorError">#a31024</color>
+    <color name="colorOnError">#FFFFFFFF</color>
+</resources>
