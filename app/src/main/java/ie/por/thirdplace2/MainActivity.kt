@@ -39,10 +39,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.github.ajalt.timberkt.Timber
+import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
-import timber.log.Timber.i
+import timber.log.Timber.Forest.i
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
