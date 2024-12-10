@@ -91,7 +91,7 @@
     <string name="success_login">Login was successful.</string>
     <string name="success_locationUpdate">Location was updated. Click back when finished.</string>
 
-
+    <!-- Extra messages -->
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="title_activity_login_view">LoginView</string>
@@ -99,9 +99,14 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="show_less">Show less</string>
+    <string name="show_more">Show more</string>
+    <string name="confirm_delete">Are you sure you want to delete this place?</string>
+    <string name="confirm_delete_message">This action cannot be undone.</string>
+
 
 </resources>

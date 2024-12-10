@@ -1,0 +1,4 @@
+package ie.por.thirdplace2.ui.components.list
+
+class PlaceListHeader {
+}
