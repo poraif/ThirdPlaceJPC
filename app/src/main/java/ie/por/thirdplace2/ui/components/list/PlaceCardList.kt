@@ -16,7 +16,7 @@ internal fun PlaceCardList(
     thirdPlaces: List<ThirdPlaceModel>,
     modifier: Modifier = Modifier,
     onDeletePlace: (ThirdPlaceModel) -> Unit,
-    onClickThirdPlaceDetails: (String) -> Unit,
+    onClickThirdPlaceDetails: (Int) -> Unit,
 ) {
     LazyColumn {
         items(

@@ -56,6 +56,7 @@ fun AddScreen(modifier: Modifier = Modifier, listViewModel: ListViewModel = hilt
             Row(
                 verticalAlignment = Alignment.CenterVertically,
             )
+            {
             TitleInput(
                 modifier = modifier,
                 onTitleChange = { title = it }

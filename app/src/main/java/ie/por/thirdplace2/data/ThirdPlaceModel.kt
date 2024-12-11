@@ -8,7 +8,7 @@ import java.util.Date
 @Entity
 data class ThirdPlaceModel(
                     @PrimaryKey(autoGenerate = true)
-                    var id: String = "abc",
+                    var id: Int = 0,
                     var title: String = "",
                     var description: String = "",
                     var amenities: List<String> = emptyList(),
@@ -22,7 +22,7 @@ data class ThirdPlaceModel(
 
 val fakePlaces = List(30) { i ->
     ThirdPlaceModel(
-        id = "12345a$i",
+        id = 12345+i,
         "Place $i",
         type = "Type $i",
         amenities = listOf("Amenity $i", "Amenity $i"),

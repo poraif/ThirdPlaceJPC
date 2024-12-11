@@ -34,7 +34,7 @@ interface ThirdPlaceDAO {
     WHERE id = :id
 """)
     suspend fun update(
-        id: String,
+        id: Int,
         title: String,
         description: String,
         amenities: List<String>,
