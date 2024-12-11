@@ -10,7 +10,7 @@ data class ThirdPlaceModel(
                     var id: String = "abc",
                     var title: String = "",
                     var description: String = "",
-                    var amenities: List<String>,
+                    var amenities: List<String> = emptyList(),
                     var type: String = "",
                     var image: Uri = Uri.EMPTY,
                     var lat : Double = 0.0,
