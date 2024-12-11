@@ -14,7 +14,7 @@ data class ThirdPlaceModel(
                     val amenities: List<String> = emptyList(),
                     val type: String = "",
                     val image: Uri = Uri.parse("https://picsum.photos/300/200"),
-                    val lat : Double = 0.0,
+                    val lat: Double = 0.0,
                     val lng: Double = 0.0,
                     val zoom: Float = 0f
             )

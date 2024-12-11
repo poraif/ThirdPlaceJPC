@@ -51,6 +51,7 @@ fun PlaceCard(
     amenities: List<String>,
     onClickDelete: () -> Unit,
     onClickThirdPlaceDetails: () -> Unit,
+    onRefreshList: () -> Unit,
 ) {
     Card(
         border = BorderStroke(1.dp, Color.Black),
@@ -59,7 +60,7 @@ fun PlaceCard(
         ),
         modifier = Modifier.padding(vertical = 2.dp, horizontal = 2.dp)
     ) {
-        PlaceCardContent(title, type, amenities, onClickDelete, onClickThirdPlaceDetails)
+        PlaceCardContent(title, type, amenities, onClickDelete, onClickThirdPlaceDetails, onRefreshList)
     }
 }
 
@@ -69,7 +70,8 @@ private fun PlaceCardContent(
     type: String,
     amenities: List<String>,
     onClickDelete: () -> Unit,
-    onClickThirdPlaceDetails: () -> Unit
+    onClickThirdPlaceDetails: () -> Unit,
+    onRefreshList: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
@@ -134,7 +136,8 @@ private fun PlaceCardContent(
                     if (showDeleteConfirmDialog) {
                         ShowDeleteAlert(
                             onDismiss = { showDeleteConfirmDialog = false },
-                            onDelete = onClickDelete
+                            onDelete = onClickDelete,
+                            onRefresh = onRefreshList
                         )
                     }
                 }
@@ -157,14 +160,16 @@ private fun PlaceCardContent(
 @Composable
 fun ShowDeleteAlert(
     onDismiss: () -> Unit,
-    onDelete: () -> Unit) {
+    onDelete: () -> Unit,
+    onRefresh: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss ,
         title = { Text(stringResource(id = R.string.confirm_delete)) },
         text = { Text(stringResource(id = R.string.confirm_delete_message)) },
         confirmButton = {
             Button(
-                onClick = { onDelete() }
+                onClick = { onDelete()
+                            onRefresh()}
             ) { Text("Yes") }
         },
         dismissButton = {
@@ -183,7 +188,8 @@ fun PlaceCardPreview() {
             type = "Outdoors",
             amenities = listOf("Charging", "Toilets"),
             onClickDelete = { },
-            onClickThirdPlaceDetails = {}
+            onClickThirdPlaceDetails = {},
+            onRefreshList = {}
         )
     }
 }

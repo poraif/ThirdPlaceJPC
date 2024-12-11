@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
@@ -21,6 +22,9 @@ import ie.por.thirdplace2.R
 import ie.por.thirdplace2.data.ThirdPlaceModel
 import ie.por.thirdplace2.data.fakePlaces
 import ie.por.thirdplace2.ui.components.general.Centre
+import ie.por.thirdplace2.ui.components.general.ShowError
+import ie.por.thirdplace2.ui.components.general.ShowLoader
+import ie.por.thirdplace2.ui.components.general.ShowRefreshList
 import ie.por.thirdplace2.ui.components.list.PlaceCardList
 import ie.por.thirdplace2.ui.components.list.PlaceListHeader
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
@@ -31,6 +35,13 @@ fun ListScreen(modifier: Modifier = Modifier,
                   listViewModel: ListViewModel = hiltViewModel()) {
 
     val thirdPlaces = listViewModel.uiThirdPlaces.collectAsState().value
+    val isErr = listViewModel.isErr.value
+    val isLoading = listViewModel.isLoading.value
+    val error = listViewModel.error.value
+
+    LaunchedEffect(Unit) {
+        listViewModel.getThirdPlaces()
+    }
 
     Column {
         Column(
@@ -39,8 +50,11 @@ fun ListScreen(modifier: Modifier = Modifier,
                 end = 24.dp
             ),
         ) {
+            if(isLoading) ShowLoader("Loading third places...")
             PlaceListHeader()
-            if(thirdPlaces.isEmpty())
+            if(!isErr)
+                ShowRefreshList(onClick = { listViewModel.getThirdPlaces() })
+            if (thirdPlaces.isEmpty() && !isErr)
                 Centre(Modifier.fillMaxSize()) {
                     Text(color = MaterialTheme.colorScheme.secondary,
                         fontWeight = FontWeight.Bold,
@@ -50,15 +64,21 @@ fun ListScreen(modifier: Modifier = Modifier,
                         text = stringResource(R.string.empty_list)
                     )
                 }
-            else
+            if (!isErr) {
                 PlaceCardList(
                     thirdPlaces = thirdPlaces,
                     onClickThirdPlaceDetails = onClickThirdPlaceDetails,
-                    onDeletePlace = {
-                            thirdPlace: ThirdPlaceModel ->
+                    onDeletePlace = { thirdPlace: ThirdPlaceModel ->
                         listViewModel.deleteThirdPlace(thirdPlace)
-                    }
+                    },
+                    onRefreshList = { listViewModel.getThirdPlaces() }
                 )
+            }
+            if (isErr) {
+                ShowError(headline = error.message!! + " error...",
+                    subtitle = error.toString(),
+                    onClick = { listViewModel.getThirdPlaces() })
+            }
         }
     }
 }
@@ -100,7 +120,8 @@ fun PreviewListScreen(modifier: Modifier = Modifier,
                 PlaceCardList (
                     thirdPlaces = thirdPlaces,
                     onDeletePlace = {},
-                    onClickThirdPlaceDetails = { }
+                    onClickThirdPlaceDetails = { },
+                    onRefreshList = { }
                 )
         }
     }
