@@ -42,7 +42,7 @@ fun AddLocationButton(
     thirdPlace: ThirdPlaceModel,
     addViewModel: AddViewModel = hiltViewModel(),
     listViewModel: ListViewModel = hiltViewModel(),
-    onAddClicked: () -> Unit,
+    onLocationChange: () -> Unit,
 ) {
     val string = R.string.button_addLocation
 }

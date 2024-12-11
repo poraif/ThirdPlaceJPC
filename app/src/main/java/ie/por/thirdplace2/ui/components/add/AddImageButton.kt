@@ -42,7 +42,7 @@ fun AddImageButton(
     thirdPlace: ThirdPlaceModel,
     addViewModel: AddViewModel = hiltViewModel(),
     listViewModel: ListViewModel = hiltViewModel(),
-    onAddClicked: () -> Unit,
+    onImageChange: () -> Unit,
 ) {
     val string = R.string.button_addImage
 }

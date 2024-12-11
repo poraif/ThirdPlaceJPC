@@ -44,7 +44,7 @@ fun AddThirdPlaceButton(
     listViewModel: ListViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
-    val thirdPlaces = listViewModel.thirdPlaceList.collectAsState().value
+    val thirdPlaces = listViewModel.uiThirdPlaces.collectAsState().value
     val title = stringResource(R.string.hint_placeTitle)
     val description = ""
     val amenities = intArrayOf(0, 1)
