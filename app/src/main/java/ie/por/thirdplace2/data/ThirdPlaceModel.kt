@@ -3,34 +3,35 @@ package ie.por.thirdplace2.data
 import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity
 data class ThirdPlaceModel(
                     @PrimaryKey(autoGenerate = true)
-                    var id: Int = 0,
-                    var title: String = "",
-                    var description: String = "",
-                    var amenities: List<String> = emptyList(),
-                    var type: String = "",
-                    var image: Uri = Uri.EMPTY,
-                    var lat : Double = 0.0,
-                    var lng: Double = 0.0,
-                    var zoom: Float = 0f
+                    val id: Int = 0,
+                    val _id: String = "N/A",
+                    val title: String = "",
+                    val description: String = "",
+                    val amenities: List<String> = emptyList(),
+                    val type: String = "",
+                    val image: Uri = Uri.parse("https://picsum.photos/300/200"),
+                    val lat : Double = 0.0,
+                    val lng: Double = 0.0,
+                    val zoom: Float = 0f
             )
 
 
 val fakePlaces = List(30) { i ->
     ThirdPlaceModel(
-        id = 12345+i,
-        "Place $i",
-        type = "Type $i",
-        amenities = listOf("Amenity $i", "Amenity $i"),
-        description = "Description $i",
-        image = Uri.parse("https://picsum.photos/200/300?random=$i"),
-        lat = 37.7749 + i * 0.01,
-        lng = -122.4194 + i * 0.01,
-        zoom = 10f
+        12345+i,
+         "12345 $i",
+        "Type $i",
+        "Description $i",
+        listOf("Amenity $i", "Amenity $i"),
+        "Outdoors $i",
+        Uri.parse("https://picsum.photos/300/200"),
+        37.7749 + i * 0.01,
+        -122.4194 + i * 0.01,
+        10f
     )
 }
 
