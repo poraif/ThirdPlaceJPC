@@ -6,17 +6,17 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ThirdPlaceModel(
-                    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
                     val id: Int = 0,
-                    val _id: String = "N/A",
-                    val title: String = "",
-                    val description: String = "",
-                    val amenities: List<String> = emptyList(),
-                    val type: String = "",
-                    val image: Uri = Uri.parse("https://picsum.photos/300/200"),
-                    val lat: Double = 0.0,
-                    val lng: Double = 0.0,
-                    val zoom: Float = 0f
+    val _id: String = "N/A",
+    var title: String = "",
+    var description: String = "",
+    val amenities: List<String> = emptyList(),
+    val type: String = "",
+    val image: Uri = Uri.parse("https://picsum.photos/300/200"),
+    val lat: Double = 0.0,
+    val lng: Double = 0.0,
+    val zoom: Float = 0f
             )
 
 

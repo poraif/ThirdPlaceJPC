@@ -25,17 +25,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import ie.por.thirdplace2.R
 import ie.por.thirdplace2.data.ThirdPlaceModel
 import ie.por.thirdplace2.ui.components.details.DetailsHeader
 import ie.por.thirdplace2.ui.components.details.ReadOnlyTextField
@@ -49,31 +52,41 @@ fun DetailsScreen(
     detailViewModel: DetailsViewModel = hiltViewModel()
 ) {
     var thirdPlace = detailViewModel.thirdPlace.value
-    val errorEmptyTitle = "Ensure title is entered"
-    val errorShortTitle = "Title must be at least 6 characters"
+    val errorEmptyTitle = "Please enter a title"
+    val errorShortTitle = "Please enter a title longer than 6 characters"
+    val errorDescriptionLength = "Please enter a description longer than 20 characters"
+    val errorEmptyType = "Please select a type of place from the options"
 
-
-    val errorShortMessage = "Message must be at least 2 characters"
     var text by rememberSaveable { mutableStateOf("") }
     var onTitleChanged by rememberSaveable { mutableStateOf(false) }
+    var onDescriptionChanged by rememberSaveable { mutableStateOf(false) }
+    var onTypeChanged by rememberSaveable { mutableStateOf(false) }
+    var onAmenitiesChanged by rememberSaveable { mutableStateOf(false) }
+    var onImageChanged by rememberSaveable { mutableStateOf(false) }
+    var onLocationChanged by rememberSaveable { mutableStateOf(false) }
+
     var isEmptyError by rememberSaveable { mutableStateOf(false) }
-    var isShortError by rememberSaveable { mutableStateOf(false) }
+    var titleShortError by rememberSaveable { mutableStateOf(false) }
+    var descriptionShortError by rememberSaveable { mutableStateOf(false) }
 
     val context = LocalContext.current
     val isError = detailViewModel.isErr.value
     val error = detailViewModel.error.value
     val isLoading = detailViewModel.isLoading.value
 
-    if(isLoading) ShowLoader("Retrieving Donation Details...")
+    if(isLoading) ShowLoader("Retrieving details of Third Place")
 
     fun validate(text: String) {
         isEmptyError = text.isEmpty()
-        isShortError = text.length < 2
-        onMessageChanged = !(isEmptyError || isShortError)
+        titleShortError = text.length < 6
+        descriptionShortError = text.length < 20
+        onTitleChanged = !(isEmptyError || titleShortError)
+        onDescriptionChanged = !(descriptionShortError)
+        onTypeChanged = !(isEmptyError)
     }
 
     if(isError)
-        Toast.makeText(context,"Unable to fetch Details at this Time...",
+        Toast.makeText(context,"Error fetching details",
             Toast.LENGTH_SHORT).show()
     if(!isError && !isLoading)
         Column(modifier = modifier.padding(
@@ -82,7 +95,7 @@ fun DetailsScreen(
         ),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            DetailsScreenText()
+            DetailsHeader()
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize().padding(
@@ -91,46 +104,37 @@ fun DetailsScreen(
                 ),
             )
             {
-                //Payment Type Field
-                ReadOnlyTextField(value = donation.paymentType,
-                    label = "Payment Type")
-                //Payment Amount Field
-                ReadOnlyTextField(value = "€" + donation.paymentAmount.toString(),
-                    label = "Payment Amount")
-                //Date Donated Field
-                ReadOnlyTextField(value = donation.dateDonated.toString(),
-                    label = "Date Donated")
-                //Message Field
-                text = donation.message
+                //Title
+                text = thirdPlace.title
                 OutlinedTextField(modifier = Modifier.fillMaxWidth(),
                     value = text,
                     onValueChange = {
                         text = it
                         validate(text)
-                        donation.message = text
+                        thirdPlace.title = text
                     },
                     maxLines = 2,
-                    label = { Text(text = "Message") },
-                    isError = isEmptyError || isShortError,
+                    label = { Text(text = "title") },
+                    isError = isEmptyError || titleShortError,
                     supportingText = {
                         if (isEmptyError) {
                             Text(
                                 modifier = Modifier.fillMaxWidth(),
-                                text = errorEmptyMessage,
+                                text = errorEmptyTitle,
                                 color = MaterialTheme.colorScheme.error
                             )
                         }
                         else
-                            if (isShortError) {
+                            if (titleShortError) {
                                 Text(
                                     modifier = Modifier.fillMaxWidth(),
-                                    text = errorShortMessage,
+                                    text = errorShortTitle,
                                     color = MaterialTheme.colorScheme.error
                                 )
                             }
                     },
                     trailingIcon = {
-                        if (isEmptyError || isShortError)
+                        if (isEmptyError || titleShortError)
                             Icon(Icons.Filled.Warning,"error", tint = MaterialTheme.colorScheme.error)
                         else
                             Icon(
@@ -143,8 +147,54 @@ fun DetailsScreen(
                         unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
                     )
                 )
-                //End of Message Field
+
+
+                //Description
+                text = thirdPlace.description
+                OutlinedTextField(modifier = Modifier.fillMaxWidth(),
+                    value = text,
+                    onValueChange = {
+                        text = it
+                        validate(text)
+                        thirdPlace.description = text
+                    },
+                    maxLines = 4,
+                    label = { Text(text = "description") },
+                    isError = descriptionShortError,
+                    supportingText = {
+                            if (descriptionShortError) {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    text = errorDescriptionLength,
+                                    color = MaterialTheme.colorScheme.error
+                                )
+                            }
+                    },
+                    trailingIcon = {
+                        if (descriptionShortError)
+                            Icon(Icons.Filled.Warning,"error", tint = MaterialTheme.colorScheme.error)
+                        else
+                            Icon(
+                                Icons.Default.Edit, contentDescription = "add/edit",
+                                tint = Color.Black
+                            )
+                    },
+                    keyboardActions = KeyboardActions { validate(text) },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                    )
+                )
+
+                //Type
+                ReadOnlyTextField(value = thirdPlace.type,
+                    label = "Third Place type")
+
+                //Amenities
+                ReadOnlyTextField(value = thirdPlace.amenities.toString(),
+                    label = "Amenities")
+
                 Spacer(modifier.height(height = 48.dp))
+
                 Button(
                     onClick = {
                         detailViewModel.updateDonation(donation)

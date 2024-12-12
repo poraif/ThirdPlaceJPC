@@ -75,9 +75,10 @@
     <string name="amenity_alwaysOpen">Always open</string>
 
     <!-- Error messages -->
-    <string name="error_titleTypeMissing">Title and type are required</string>
-    <string name="error_titleLength">Title must be less than 25 characters</string>
+    <string name="error_titleMissing">Title is required</string>
+    <string name="error_titleLength">Title must be less than 6 characters</string>
     <string name="error_descriptionLength">Description must be less than 100 characters</string>
+    <string name="error_typeMissing">Please choose a type for the third place</string>
     <string name="error_emptyFields">Please fill in all fields</string>
     <string name="error_email">Please enter a valid email address</string>
     <string name="error_password">Password does not match</string>
