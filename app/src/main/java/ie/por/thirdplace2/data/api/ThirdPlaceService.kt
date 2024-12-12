@@ -26,6 +26,4 @@ interface ThirdPlaceService {
     suspend fun put(@Path("id") id: String,
                     @Body donation: ThirdPlaceModel
     ): ThirdPlaceWrapper
-
-
 }

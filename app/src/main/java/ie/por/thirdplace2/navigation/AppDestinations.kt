@@ -5,12 +5,11 @@ import androidx.compose.material.icons.automirrored.filled.List
 import androidx.compose.material.icons.automirrored.outlined.Login
 import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.Details
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.PersonAdd
 import androidx.compose.material.icons.filled.Public
-import androidx.compose.material.icons.outlined.Login
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -20,7 +19,6 @@ interface AppDestination {
     val label: String
     val route: String
 }
-
 
 object About : AppDestination {
     override val icon = Icons.Filled.Info
@@ -52,10 +50,10 @@ object Login : AppDestination {
     override val route = "login"
 }
 
-object Signup : AppDestination {
+object Register : AppDestination {
     override val icon = Icons.Filled.PersonAdd
-    override val label = "Signup"
-    override val route = "signup"
+    override val label = "Register"
+    override val route = "register"
 }
 
 object Profile : AppDestination {
@@ -64,20 +62,25 @@ object Profile : AppDestination {
     override val route = "profile"
 }
 
-
-/*object Details : AppDestination {
+object Details : AppDestination {
     override val icon = Icons.Filled.Details
     override val label = "Details"
     const val idArg = "id"
     override val route = "details/{$idArg}"
     val arguments = listOf(
-        navArgument(idArg) { type = NavType.IntType }
+        navArgument(idArg) { type = NavType.StringType }
     )
-}*/
+}
+
+object Home : AppDestination {
+    override val icon = Icons.Filled.Home
+    override val label = "Home"
+    override val route = "Home"
+}
 
 val bottomAppBarDestinations = listOf(Add, List, Map, About, Profile)
-val userSignedOutDestinations = listOf(Login, Signup)
-val allDestinations = listOf(Add, List, Map, About, Login, Signup, Profile)
+val userSignedOutDestinations = listOf(Login, Register)
+val allDestinations = listOf(Add, List, Map, About, Login, Register, Profile, Home, Details)
 
 
 /*Icon list:

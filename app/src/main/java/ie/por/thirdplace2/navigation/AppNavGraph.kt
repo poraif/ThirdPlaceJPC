@@ -5,18 +5,18 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ie.por.thirdplace2.ui.screens.about.AboutScreen
 import ie.por.thirdplace2.ui.screens.add.AddScreen
+import ie.por.thirdplace2.ui.screens.details.DetailsScreen
+import ie.por.thirdplace2.ui.screens.home.HomeScreen
 import ie.por.thirdplace2.ui.screens.list.ListScreen
 import ie.por.thirdplace2.ui.screens.login.LoginScreen
-import ie.por.thirdplace2.ui.screens.signup.SignupScreen
 import ie.por.thirdplace2.ui.screens.profile.ProfileScreen
-import ie.por.thirdplace2.ui.screens.map.MapScreen
-
-
+import ie.por.thirdplace2.ui.screens.register.RegisterScreen
 
 
 @Composable
@@ -36,10 +36,15 @@ fun NavHostProvider(
             AddScreen(modifier = modifier)
         }
 
+        //Home screen
+        composable(route = Home.route) {
+            HomeScreen(modifier = modifier)
+        }
+
         //List Screen
         composable(route = List.route) {
-            AddScreen(modifier = modifier,
-                onClickThirdPlaceEdit = {
+            ListScreen(modifier = modifier,
+                onClickThirdPlaceDetails = {
                         thirdPlaceId : Int ->
                     navController.navigateToThirdPlaceEdit(thirdPlaceId)
                 },
@@ -59,28 +64,41 @@ fun NavHostProvider(
             )
         }
 
-        //Signup screen
-        composable(route = Signup.route) {
-            SignupScreen(
+        //Register screen
+        composable(route = Register.route) {
+            RegisterScreen(
                 navController = navController,
                 onRegister = { navController.popBackStack() }
             )
         }
 
-    }
-}
+        //Profile screen
+        composable(route = Profile.route) {
+            ProfileScreen(
+                onSignOut = {
+                    navController.popBackStack()
+                    navController.navigate(Login.route) {
+                        popUpTo(Home.route) { inclusive = true }
+                    }
+                },
+            )
+        }
 
-private fun NavHostController.navigateToThirdPlaceEdit(thirdPlaceId: Int) {
-    this.navigate("edit/$thirdPlaceId")
-}
-
-/*        composable(
+        //Details screen
+        composable(
             route = Details.route,
             arguments = Details.arguments
         )
         { navBackStackEntry ->
-            val id = navBackStackEntry.arguments?.getInt(Details.idArg)
+            val id = navBackStackEntry.arguments?.getString(Details.idArg)
             if (id != null) {
                 DetailsScreen()
             }
-        }*/
+        }
+
+    }
+}
+
+private fun NavController.navigateToThirdPlaceEdit(thirdPlaceId: Int) {
+    this.navigate("edit/$thirdPlaceId")
+}

@@ -19,4 +19,6 @@
     <!-- Error messages -->
     <color name="colorError">#a31024</color>
     <color name="colorOnError">#FFFFFFFF</color>
+
+    <color name="black">#000000</color>
 </resources>

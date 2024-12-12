@@ -1,8 +1,6 @@
 package ie.por.thirdplace2.data.api
 
 import ie.por.thirdplace2.data.ThirdPlaceModel
-import ie.por.thirdplace2.data.api.ThirdPlaceService
-import ie.por.thirdplace2.data.api.ThirdPlaceWrapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject

@@ -25,7 +25,8 @@ import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 @Composable
 fun BottomAppBarProvider(
     navController: NavHostController,
-    currentScreen: AppDestination
+    currentScreen: AppDestination,
+    userDestinations: List<AppDestination>
 ) {
     //initializing the default selected item
     var navigationSelectedItem by remember { mutableIntStateOf(0) }
@@ -35,7 +36,7 @@ fun BottomAppBarProvider(
         contentColor = MaterialTheme.colorScheme.onSecondary,
     ) {
         //getting the list of bottom navigation items
-        bottomAppBarDestinations.forEachIndexed { index, navigationItem ->
+        userDestinations.forEachIndexed { index, navigationItem ->
             //iterating all items with their respective indexes
             NavigationBarItem(
                 selected = navigationItem == currentScreen,
@@ -68,6 +69,8 @@ fun BottomAppBarScreenPreview() {
     Thirdplace2Theme {
         BottomAppBarProvider(
             rememberNavController(),
-            bottomAppBarDestinations.get(1))
+            bottomAppBarDestinations.get(1),
+            bottomAppBarDestinations
+        )
     }
 }

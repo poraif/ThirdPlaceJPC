@@ -1,4 +1,12 @@
 package ie.por.thirdplace2.ui.screens.about
 
-class AboutScreen {
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
+
+@Composable
+fun AboutScreen(modifier: Modifier = Modifier,
+                aboutViewModel: AboutViewModel = hiltViewModel()
+) {
+
 }

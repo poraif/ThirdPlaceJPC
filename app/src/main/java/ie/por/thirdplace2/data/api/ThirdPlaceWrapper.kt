@@ -14,10 +14,3 @@ class ThirdPlaceWrapper {
     var zoom: Float = 0f
     var data: ThirdPlaceModel? = null
 }
-
-class ServiceEndPoints {
-    companion object {
-        const val BASE_URL= "https://donationxweb-single-server.onrender.com/"
-        const val THIRDPLACES_ENDPOINT = "thirdplaces"
-    }
-}
