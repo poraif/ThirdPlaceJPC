@@ -25,25 +25,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import ie.por.thirdplace2.R
-import ie.por.thirdplace2.data.ThirdPlaceModel
 import ie.por.thirdplace2.ui.components.details.DetailsHeader
 import ie.por.thirdplace2.ui.components.details.ReadOnlyTextField
 import ie.por.thirdplace2.ui.components.general.ShowLoader
-import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -197,11 +191,12 @@ fun DetailsScreen(
 
                 Button(
                     onClick = {
-                        detailViewModel.updateDonation(donation)
-                        onMessageChanged = false
+                        detailViewModel.updateThirdPlace(thirdPlace)
+                        onTitleChanged = false
+                        onDescriptionChanged = false
                     },
                     elevation = ButtonDefaults.buttonElevation(20.dp),
-                    enabled = onMessageChanged
+                    enabled = onTitleChanged && onDescriptionChanged,
                 ){
                     Icon(Icons.Default.Save, contentDescription = "Save")
                     Spacer(modifier.width(width = 8.dp))
