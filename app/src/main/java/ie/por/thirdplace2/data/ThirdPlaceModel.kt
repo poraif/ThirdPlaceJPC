@@ -16,7 +16,8 @@ data class ThirdPlaceModel(
     val image: Uri = Uri.parse("https://picsum.photos/300/200"),
     val lat: Double = 0.0,
     val lng: Double = 0.0,
-    val zoom: Float = 0f
+    val zoom: Float = 0f,
+    var email: String = "peadar@email.com"
             )
 
 
@@ -31,7 +32,8 @@ val fakePlaces = List(30) { i ->
         Uri.parse("https://picsum.photos/300/200"),
         37.7749 + i * 0.01,
         -122.4194 + i * 0.01,
-        10f
+        10f,
+        "peadar@email.com"
     )
 }
 

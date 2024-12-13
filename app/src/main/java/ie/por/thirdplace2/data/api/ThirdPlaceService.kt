@@ -10,20 +10,37 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ThirdPlaceService {
+
+    @GET(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{email}")
+    suspend fun getall(
+        @Path("email") email: String)
+            : Response<List<ThirdPlaceModel>>
+
+    @GET(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{email}" + "/{id}")
+    suspend fun get(@Path("email") email: String,
+                    @Path("id") id: String): Response<List<ThirdPlaceModel>>
+
     @GET(ServiceEndPoints.THIRDPLACES_ENDPOINT)
-    suspend fun getall(): Response<List<ThirdPlaceModel>>
+    suspend fun admingetall(): Response<List<ThirdPlaceModel>>
 
     @GET(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{id}")
-    suspend fun get(@Path("id") id: String): Response<List<ThirdPlaceModel>>
+    suspend fun adminget(@Path("id") id: String): Response<List<ThirdPlaceModel>>
+
+    @DELETE(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{email}" + "/{id}")
+    suspend fun delete(@Path("email") email: String,
+                       @Path("id") id: String): ThirdPlaceWrapper
 
     @DELETE(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{id}")
-    suspend fun delete(@Path("id") id: String): ThirdPlaceWrapper
+    suspend fun adminDelete(@Path("id") id: String): ThirdPlaceWrapper
 
-    @POST(ServiceEndPoints.THIRDPLACES_ENDPOINT)
-    suspend fun post(@Body donation: ThirdPlaceModel): ThirdPlaceWrapper
+    @POST(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{email}")
+    suspend fun post(@Path("email") email: String,
+                     @Body donation: ThirdPlaceModel): ThirdPlaceWrapper
 
-    @PUT(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{id}")
-    suspend fun put(@Path("id") id: String,
+    @PUT(ServiceEndPoints.THIRDPLACES_ENDPOINT + "/{email}" + "/{id}")
+    suspend fun put(@Path("email") email: String,
+                    @Path("id") id: String,
                     @Body donation: ThirdPlaceModel
+
     ): ThirdPlaceWrapper
 }

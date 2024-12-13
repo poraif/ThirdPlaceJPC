@@ -8,12 +8,14 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.por.thirdplace2.data.ThirdPlaceModel
 import ie.por.thirdplace2.data.api.RetrofitRepository
+import ie.por.thirdplace2.firebase.services.AuthService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject
 constructor(private val repository: RetrofitRepository,
+            private val authService: AuthService,
             savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
@@ -27,7 +29,7 @@ constructor(private val repository: RetrofitRepository,
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                thirdPlace.value = repository.get(id)[0]
+                thirdPlace.value = repository.get(authService.email!!,id)[0]
                 isErr.value = false
                 isLoading.value = false
             } catch (e: Exception) {
@@ -42,7 +44,7 @@ constructor(private val repository: RetrofitRepository,
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                repository.update(thirdPlace)
+                repository.update(authService.email!!, thirdPlace)
                 isErr.value = false
                 isLoading.value = false
             } catch (e: Exception) {

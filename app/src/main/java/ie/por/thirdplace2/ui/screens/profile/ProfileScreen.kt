@@ -20,8 +20,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ie.por.thirdplace2.R
 import ie.por.thirdplace2.ui.components.general.HeadingTextComponent
 import ie.por.thirdplace2.ui.screens.login.LoginViewModel
-import ie.por.thirdplace2.ui.screens.profile.BasicContent
-import ie.por.thirdplace2.ui.screens.profile.ProfileViewModel
 import ie.por.thirdplace2.ui.screens.register.RegisterViewModel
 
 @Composable
@@ -42,6 +40,7 @@ fun ProfileScreen(
         //   if(loginViewModel.currentUser?.photoUrl?.path.isNullOrEmpty())
         BasicContent(
             displayName = profileViewModel.displayName
+            email = profileViewModel.email
         )
 //        else
 //            ProfileContent(

@@ -21,20 +21,28 @@ class AuthRepository
     override val isUserAuthenticatedInFirebase : Boolean
         get() = firebaseAuth.currentUser != null
 
-    override suspend fun authenticateUser(email: String, password: String): FirebaseSignInResponse {
+    override val email: String?
+        get() = firebaseAuth.currentUser?.email
+
+
+    override suspend fun authenticateUser(email: String, password: String)
+            : FirebaseSignInResponse {
         return try {
-                val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-                Response.Success(result.user!!)
+            val result = firebaseAuth
+                .signInWithEmailAndPassword(email, password).await()
+            Response.Success(result.user!!)
         } catch (e: Exception) {
-                e.printStackTrace()
-                Response.Failure(e)
+            e.printStackTrace()
+            Response.Failure(e)
         }
     }
-
-    override suspend fun createUser(name: String, email: String, password: String): FirebaseSignInResponse {
+    override suspend fun createUser(name: String, email: String, password: String)
+            : FirebaseSignInResponse {
         return try {
-            val result = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            result.user?.updateProfile(UserProfileChangeRequest.Builder().setDisplayName(name).build())?.await()
+            val result = firebaseAuth
+                .createUserWithEmailAndPassword(email, password).await()
+            result.user?.updateProfile(UserProfileChangeRequest
+                .Builder().setDisplayName(name).build())?.await()
             return Response.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()
@@ -45,5 +53,4 @@ class AuthRepository
     override suspend fun signOut() {
         firebaseAuth.signOut()
     }
-
 }

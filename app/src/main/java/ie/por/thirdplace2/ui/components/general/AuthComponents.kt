@@ -71,7 +71,7 @@ import ie.por.thirdplace2.ui.theme.startGradientColor
 
 @Preview
 @Composable
-fun DonationCardPreview() {
+fun PlaceCardPreview() {
     Thirdplace2Theme {
         Column {
             //HeadingTextComponent("A Heading")

@@ -35,10 +35,9 @@ import ie.por.thirdplace2.ui.components.general.HeadingLogoComponent
 import ie.por.thirdplace2.ui.components.general.HeadingTextComponent
 import ie.por.thirdplace2.ui.components.general.MyTextFieldComponent
 import ie.por.thirdplace2.ui.components.general.PasswordTextFieldComponent
-import ie.por.thirdplace2.ui.components.general.UnderLinedTextComponent
 import ie.por.thirdplace2.ui.components.general.ShowLoader
-import ie.por.thirdplace2.ui.screens.login.LoginUIEvent
-import ie.por.thirdplace2.ui.theme.Thirdplace2Themee
+import ie.por.thirdplace2.ui.components.general.UnderLinedTextComponent
+import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 
 @Composable
 fun LoginScreen(
@@ -130,7 +129,7 @@ fun LoginScreen(
 @Preview
 @Composable
 fun LoginScreenPreview() {
-    Thirdplace2Themee {
+    Thirdplace2Theme {
         PreviewLoginScreen()
     }
 }

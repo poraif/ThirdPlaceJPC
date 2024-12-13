@@ -6,12 +6,15 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.por.thirdplace2.data.ThirdPlaceModel
 import ie.por.thirdplace2.data.api.RetrofitRepository
+import ie.por.thirdplace2.firebase.services.AuthService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddViewModel @Inject
-constructor(private val repository: RetrofitRepository) : ViewModel() {
+constructor(private val repository: RetrofitRepository,
+            private val authService: AuthService
+) : ViewModel() {
 
     var isErr = mutableStateOf(false)
     var error = mutableStateOf(Exception())
@@ -26,7 +29,7 @@ fun insert(thirdPlace: ThirdPlaceModel) =
     viewModelScope.launch {
         try {
             isLoading.value = true
-            repository.insert(thirdPlace)
+            repository.insert(authService.email!!,thirdPlace)
             isErr.value = false
             isLoading.value = false
         } catch (e: Exception) {

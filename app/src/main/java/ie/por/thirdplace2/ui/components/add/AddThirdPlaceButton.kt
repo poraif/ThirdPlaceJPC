@@ -91,7 +91,7 @@ fun AddThirdPlaceButton(
 
     if (isError) {
         Toast.makeText(
-            context, "Unable to Donate at this Time...",
+            context, "Unable to add a place at this Time",
             Toast.LENGTH_SHORT
         ).show()
     } else {

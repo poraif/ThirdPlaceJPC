@@ -8,42 +8,58 @@ import javax.inject.Inject
 class RetrofitRepository @Inject
 constructor(private val serviceApi: ThirdPlaceService)  {
 
-    suspend fun getAll(): List<ThirdPlaceModel>
+    suspend fun adminGetAll(): List<ThirdPlaceModel>
     {
         return withContext(Dispatchers.IO) {
-            val thirdPlaces = serviceApi.getall()
+            val thirdPlaces = serviceApi.admingetall()
             thirdPlaces.body() ?: emptyList()
         }
     }
 
-    suspend fun get(id: String): List<ThirdPlaceModel>
+    suspend fun getAll(email: String): List<ThirdPlaceModel>
     {
         return withContext(Dispatchers.IO) {
-            val thirdPlace = serviceApi.get(id)
+            val donations = serviceApi.getall(email)
+            donations.body() ?: emptyList()
+        }
+    }
+
+    suspend fun adminGet(id: String): List<ThirdPlaceModel>
+    {
+        return withContext(Dispatchers.IO) {
+            val thirdPlace = serviceApi.adminget(id)
             thirdPlace.body() ?: emptyList()
         }
     }
 
-    suspend fun insert(thirdPlace: ThirdPlaceModel) : ThirdPlaceWrapper
+    suspend fun get(email: String, id: String): List<ThirdPlaceModel>
     {
         return withContext(Dispatchers.IO) {
-            val wrapper = serviceApi.post(thirdPlace)
+            val thirdPlace = serviceApi.get(email, id)
+            thirdPlace.body() ?: emptyList()
+        }
+    }
+
+    suspend fun insert(email: String, thirdPlace: ThirdPlaceModel) : ThirdPlaceWrapper
+    {
+        return withContext(Dispatchers.IO) {
+            val wrapper = serviceApi.post(email, thirdPlace)
             wrapper
         }
     }
 
-    suspend fun update(thirdPlace: ThirdPlaceModel) : ThirdPlaceWrapper
+    suspend fun update(email: String, thirdPlace: ThirdPlaceModel) : ThirdPlaceWrapper
     {
         return withContext(Dispatchers.IO) {
-            val wrapper = serviceApi.put(thirdPlace._id,thirdPlace)
+            val wrapper = serviceApi.put(email, thirdPlace._id, thirdPlace)
             wrapper
         }
     }
 
-    suspend fun delete(thirdPlace: ThirdPlaceModel) : ThirdPlaceWrapper
+    suspend fun delete(email: String, thirdPlace: ThirdPlaceModel) : ThirdPlaceWrapper
     {
         return withContext(Dispatchers.IO) {
-            val wrapper = serviceApi.delete(thirdPlace._id)
+            val wrapper = serviceApi.delete(email, thirdPlace._id)
             wrapper
         }
     }
