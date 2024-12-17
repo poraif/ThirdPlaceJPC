@@ -65,6 +65,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ie.por.thirdplace2.R
+import ie.por.thirdplace2.data.rules.Constants.SIGN_IN_WITH_GOOGLE
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 import ie.por.thirdplace2.ui.theme.endGradientColor
 import ie.por.thirdplace2.ui.theme.startGradientColor
@@ -80,6 +81,61 @@ fun PlaceCardPreview() {
         }
     }
 }
+
+
+@Composable
+fun GoogleSignInButtonComponent(onButtonClicked: () -> Unit) {
+    Button(
+        modifier = Modifier
+            .fillMaxWidth()
+            .heightIn(48.dp),
+        onClick = {
+            onButtonClicked.invoke()
+        },
+        contentPadding = PaddingValues(),
+        colors = ButtonDefaults.buttonColors(Color.Transparent),
+        shape = RoundedCornerShape(50.dp),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .heightIn(48.dp)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            gStartGradientColor,
+                            gEndGradientColor,
+                        )
+                    ),
+                    shape = RoundedCornerShape(50.dp)
+                ),
+            contentAlignment = Alignment.Center
+        ) {
+            Row {
+                Column {
+
+                    Image(
+                        modifier = Modifier.padding(end = 40.dp),
+                        painter = painterResource(
+                            id = R.drawable.ic_google_logo
+                        ),
+                        contentDescription = null
+                    )
+                }
+                Text(
+                    text = SIGN_IN_WITH_GOOGLE,
+                    fontSize = 18.sp,
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    modifier = Modifier.padding(end = 40.dp)
+                )
+            }
+        }
+
+    }
+}
+
 
 @Composable
 fun NormalTextComponent(value: String) {
