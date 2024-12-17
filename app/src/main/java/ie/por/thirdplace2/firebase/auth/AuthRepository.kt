@@ -7,6 +7,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.UserProfileChangeRequest
 import ie.por.thirdplace2.firebase.services.AuthService
 import ie.por.thirdplace2.firebase.services.FirebaseSignInResponse
+import ie.por.thirdplace2.firebase.services.SignInWithGoogleResponse
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -44,7 +45,9 @@ class AuthRepository
             val result = firebaseAuth
                 .createUserWithEmailAndPassword(email, password).await()
             result.user?.updateProfile(UserProfileChangeRequest
-                .Builder().setDisplayName(name).build())?.await()
+                .Builder()
+                .setDisplayName(name)
+                .build())?.await()
             return Response.Success(result.user!!)
         } catch (e: Exception) {
             e.printStackTrace()

@@ -9,7 +9,6 @@ object Constants {
     //User fields
     const val DISPLAY_NAME = "displayName"
     const val EMAIL = "email"
-    const val PHOTO_URL = "photoUrl"
 
     //Names
     const val SIGN_IN_REQUEST = "signInRequest"
