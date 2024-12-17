@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.por.thirdplace2.data.ThirdPlaceModel
-import ie.por.thirdplace2.data.api.RetrofitRepository
 import ie.por.thirdplace2.firebase.services.AuthService
+import ie.por.thirdplace2.firebase.services.FirestoreService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsViewModel @Inject
-constructor(private val repository: RetrofitRepository,
+constructor(private val repository: FirestoreService,
             private val authService: AuthService,
             savedStateHandle: SavedStateHandle
 ) : ViewModel() {
@@ -29,7 +29,7 @@ constructor(private val repository: RetrofitRepository,
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                thirdPlace.value = repository.get(authService.email!!,id)[0]
+                thirdPlace.value = repository.get(authService.email!!,id)!!
                 isErr.value = false
                 isLoading.value = false
             } catch (e: Exception) {

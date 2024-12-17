@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.runtime.toMutableStateList
@@ -24,7 +23,6 @@ import ie.por.thirdplace2.data.fakePlaces
 import ie.por.thirdplace2.ui.components.general.Centre
 import ie.por.thirdplace2.ui.components.general.ShowError
 import ie.por.thirdplace2.ui.components.general.ShowLoader
-import ie.por.thirdplace2.ui.components.general.ShowRefreshList
 import ie.por.thirdplace2.ui.components.list.PlaceCardList
 import ie.por.thirdplace2.ui.components.list.PlaceListHeader
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
@@ -39,9 +37,11 @@ fun ListScreen(modifier: Modifier = Modifier,
     val isLoading = listViewModel.isLoading.value
     val error = listViewModel.error.value
 
+/*
     LaunchedEffect(Unit) {
         listViewModel.getThirdPlaces()
     }
+*/
 
     Column {
         Column(
@@ -52,8 +52,8 @@ fun ListScreen(modifier: Modifier = Modifier,
         ) {
             if(isLoading) ShowLoader("Loading third places...")
             PlaceListHeader()
-            if(!isErr)
-                ShowRefreshList(onClick = { listViewModel.getThirdPlaces() })
+/*            if(!isErr)
+                ShowRefreshList(onClick = { listViewModel.getThirdPlaces() })*/
             if (thirdPlaces.isEmpty() && !isErr)
                 Centre(Modifier.fillMaxSize()) {
                     Text(color = MaterialTheme.colorScheme.secondary,
@@ -71,7 +71,7 @@ fun ListScreen(modifier: Modifier = Modifier,
                     onDeletePlace = { thirdPlace: ThirdPlaceModel ->
                         listViewModel.deleteThirdPlace(thirdPlace)
                     },
-                    onRefreshList = { listViewModel.getThirdPlaces() }
+                    // onRefreshList = { reportViewModel.getDonations() }
                 )
             }
             if (isErr) {
@@ -80,6 +80,7 @@ fun ListScreen(modifier: Modifier = Modifier,
                     onClick = { listViewModel.getThirdPlaces() })
             }
         }
+
     }
 }
 

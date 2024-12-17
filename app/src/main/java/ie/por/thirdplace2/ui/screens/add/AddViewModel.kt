@@ -5,17 +5,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.por.thirdplace2.data.ThirdPlaceModel
-import ie.por.thirdplace2.data.api.RetrofitRepository
 import ie.por.thirdplace2.firebase.services.AuthService
+import ie.por.thirdplace2.firebase.services.FirestoreService
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddViewModel @Inject
-constructor(private val repository: RetrofitRepository,
-            private val authService: AuthService
-) : ViewModel() {
-
+constructor(private val repository: FirestoreService,
+            private val authService: AuthService) : ViewModel() {
     var isErr = mutableStateOf(false)
     var error = mutableStateOf(Exception())
     var isLoading = mutableStateOf(false)

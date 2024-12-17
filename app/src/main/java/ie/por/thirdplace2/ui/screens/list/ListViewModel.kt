@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.por.thirdplace2.data.ThirdPlaceModel
-import ie.por.thirdplace2.data.api.RetrofitRepository
 import ie.por.thirdplace2.firebase.services.AuthService
+import ie.por.thirdplace2.firebase.services.FirestoreService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject
-constructor(private val repository: RetrofitRepository,
+constructor(private val repository: FirestoreService,
             private val authService: AuthService
 ) : ViewModel() {
     private val _thirdPlaces
@@ -27,23 +27,17 @@ constructor(private val repository: RetrofitRepository,
     var isLoading = mutableStateOf(false)
     var error = mutableStateOf(Exception())
 
-/*    init {
-        viewModelScope.launch {
-            repository.getAll().collect { listOfThirdPlaces ->
-                _thirdPlaces.value = listOfThirdPlaces
-            }
-        }
-    }*/
-
     init { getThirdPlaces() }
 
 fun getThirdPlaces() {
     viewModelScope.launch {
         try {
             isLoading.value = true
-            _thirdPlaces.value = repository.getAll(authService.email!!)
-            isErr.value = false
-            isLoading.value = false
+            repository.getAll(authService.email!!).collect { items ->
+                _thirdPlaces.value = items
+                isErr.value = false
+                isLoading.value = false
+            }
             Timber.i("RVM : ${_thirdPlaces.value}")
         }
         catch(e:Exception) {
@@ -57,7 +51,7 @@ fun getThirdPlaces() {
 
     fun deleteThirdPlace(thirdPlace: ThirdPlaceModel) {
         viewModelScope.launch {
-            repository.delete(authService.email!!,thirdPlace)
+            repository.delete(authService.email!!,thirdPlace._id)
         }
     }
 }

@@ -3,12 +3,13 @@ package ie.por.thirdplace2.data
 import android.net.Uri
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.firebase.firestore.DocumentId
 
 @Entity
 data class ThirdPlaceModel(
     @PrimaryKey(autoGenerate = true)
                     val id: Int = 0,
-    val _id: String = "N/A",
+    @DocumentId val _id: String = "N/A",
     var title: String = "",
     var description: String = "",
     val amenities: List<String> = emptyList(),

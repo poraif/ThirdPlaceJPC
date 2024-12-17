@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ie.por.thirdplace2.R
 import ie.por.thirdplace2.data.ThirdPlaceModel
-import ie.por.thirdplace2.ui.components.general.ShowLoader
 import ie.por.thirdplace2.ui.screens.add.AddViewModel
 import ie.por.thirdplace2.ui.screens.list.ListViewModel
 import timber.log.Timber
@@ -37,7 +36,7 @@ fun AddThirdPlaceButton(
     modifier: Modifier = Modifier,
     thirdPlace: ThirdPlaceModel,
     addViewModel: AddViewModel = hiltViewModel(),
-    listViewModel: ListViewModel = hiltViewModel(),
+    listViewModel: ListViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val thirdPlaces = listViewModel.uiThirdPlaces.collectAsState().value
@@ -52,9 +51,9 @@ fun AddThirdPlaceButton(
 
     val isError = addViewModel.isErr.value
     val error = addViewModel.error.value
-    val isLoading = addViewModel.isLoading.value
-
-    if (isLoading) ShowLoader("Trying to add a place...")
+//    val isLoading = addViewModel.isLoading.value
+//
+//    if (isLoading) ShowLoader("Trying to add a place...")
 
     Row {
         Button(
