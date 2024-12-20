@@ -28,6 +28,7 @@ internal fun PlaceCardList(
                 title = thirdPlace.title,
                 type = thirdPlace.type,
                 amenities = thirdPlace.amenities,
+                image = thirdPlace.image,
                 onClickDelete = { onDeletePlace(thirdPlace) },
                 onClickThirdPlaceDetails = { onClickThirdPlaceDetails(thirdPlace.id) }
 //                onRefreshList = { onRefreshList()

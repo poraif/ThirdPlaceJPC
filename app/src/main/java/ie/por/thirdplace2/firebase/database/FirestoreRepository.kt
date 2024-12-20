@@ -38,7 +38,6 @@ class FirestoreRepository
         firestore.collection(THIRDPLACE_COLLECTION)
             .add(thirdPlaceWithEmail)
             .await()
-
     }
 
     override suspend fun update(email: String,

@@ -121,8 +121,8 @@ fun PreviewListScreen(modifier: Modifier = Modifier,
                 PlaceCardList (
                     thirdPlaces = thirdPlaces,
                     onDeletePlace = {},
-                    onClickThirdPlaceDetails = { },
-                    onRefreshList = { }
+                    onClickThirdPlaceDetails = { }
+//                    onRefreshList = { }
                 )
         }
     }

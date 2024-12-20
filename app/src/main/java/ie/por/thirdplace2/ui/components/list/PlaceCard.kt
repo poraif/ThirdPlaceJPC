@@ -1,5 +1,6 @@
 package ie.por.thirdplace2.ui.components.list
 
+import android.net.Uri
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
@@ -10,7 +11,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
@@ -33,8 +37,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale.Companion.Crop
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -49,6 +56,7 @@ fun PlaceCard(
     title: String,
     type: String,
     amenities: List<String>,
+    image: Uri,
     onClickDelete: () -> Unit,
     onClickThirdPlaceDetails: () -> Unit
 //    onRefreshList: () -> Unit,
@@ -60,7 +68,7 @@ fun PlaceCard(
         ),
         modifier = Modifier.padding(vertical = 2.dp, horizontal = 2.dp)
     ) {
-        PlaceCardContent(title, type, amenities, onClickDelete, onClickThirdPlaceDetails
+        PlaceCardContent(title, type, amenities, image, onClickDelete, onClickThirdPlaceDetails
 //            onRefreshList
         )
     }
@@ -71,6 +79,7 @@ private fun PlaceCardContent(
     title: String,
     type: String,
     amenities: List<String>,
+    image: Uri,
     onClickDelete: () -> Unit,
     onClickThirdPlaceDetails: () -> Unit
 //    onRefreshList: () -> Unit
@@ -120,6 +129,17 @@ private fun PlaceCardContent(
                         fontWeight = FontWeight.ExtraBold
                     )
                 )
+                Spacer(Modifier.weight(1f))
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(image)
+                        .crossfade(true)
+                        .build(),
+                    contentDescription = null,
+                    contentScale = Crop,
+                    modifier = Modifier.clip(CircleShape).width(180.dp).height(180.dp)
+                )
+                Spacer(modifier = Modifier.height(10.dp))
             }
             if (expanded) {
                 Text(text = "Amenities: ${amenities.joinToString(" | ")}", style = MaterialTheme.typography.labelSmall)
@@ -191,6 +211,7 @@ fun PlaceCardPreview() {
             title = "Third Place",
             type = "Outdoors",
             amenities = listOf("Charging", "Toilets"),
+            image = Uri.parse("https://picsum.photos/300/200"),
             onClickDelete = { },
             onClickThirdPlaceDetails = {}
 //            onRefreshList = {}
