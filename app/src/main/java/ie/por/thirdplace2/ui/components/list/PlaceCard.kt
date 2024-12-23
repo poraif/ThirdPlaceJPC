@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ExpandLess
@@ -40,12 +39,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import ie.por.thirdplace2.R
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 import ie.por.thirdplace2.ui.theme.endGradientColor
@@ -137,7 +139,7 @@ private fun PlaceCardContent(
                         .build(),
                     contentDescription = null,
                     contentScale = Crop,
-                    modifier = Modifier.clip(CircleShape).width(180.dp).height(180.dp)
+                    modifier = Modifier.clip(RectangleShape).width(100.dp).height(70.dp)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
             }
