@@ -1,5 +1,6 @@
 package ie.por.thirdplace2.ui.screens.add
 
+import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,16 +19,17 @@ constructor(private val repository: FirestoreService,
     var error = mutableStateOf(Exception())
     var isLoading = mutableStateOf(false)
 
+
 /*    fun insert(thirdPlaces: ThirdPlaceModel)
             = viewModelScope.launch {
         repository.insert(thirdPlaces)
     }*/
 
-fun insert(thirdPlace: ThirdPlaceModel) =
+fun insert(thirdPlace: ThirdPlaceModel, uri: Uri) =
     viewModelScope.launch {
         try {
             isLoading.value = true
-            repository.insert(authService.email!!,thirdPlace)
+            repository.insert(authService.email!!,thirdPlace, uri)
             isErr.value = false
             isLoading.value = false
         } catch (e: Exception) {

@@ -30,6 +30,7 @@ import ie.por.thirdplace2.ui.components.add.AmenitiesCheckBoxGroup
 import ie.por.thirdplace2.ui.components.add.DescriptionInput
 import ie.por.thirdplace2.ui.components.add.TitleInput
 import ie.por.thirdplace2.ui.components.add.TypeRadioButtonGroup
+import ie.por.thirdplace2.ui.components.general.ShowImagePicker
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 import ie.por.thirdplace2.ui.screens.list.ListViewModel
 
@@ -40,7 +41,7 @@ fun AddScreen(modifier: Modifier = Modifier, listViewModel: ListViewModel = hilt
     var description by remember { mutableStateOf("") }
     var type by remember { mutableStateOf("") }
     var amenities by remember { mutableStateOf(emptyList<String>()) }
-    var image by remember { mutableStateOf("") }
+    var image by remember { mutableStateOf(Uri.EMPTY) }
     var location by remember { mutableStateOf("") }
 
     Column {
@@ -78,10 +79,11 @@ fun AddScreen(modifier: Modifier = Modifier, listViewModel: ListViewModel = hilt
                 }
             )
             Spacer(modifier.weight(1f))
-            AddImageButton(
-                modifier = modifier,
-                onImageChange = { image = it }
-            )
+                ShowImagePicker (
+                    onImageChanged = {
+                        image = it
+                    }
+                )
             Spacer(modifier.weight(1f))
             AddLocationButton(
                 modifier = modifier,
@@ -94,7 +96,7 @@ fun AddScreen(modifier: Modifier = Modifier, listViewModel: ListViewModel = hilt
                                             description = description,
                                             type = type,
                                             amenities = amenities,
-                                            image = image,
+                                            image = image.toString(),
                                             location = location)
             )
 

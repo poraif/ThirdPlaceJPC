@@ -1,6 +1,7 @@
 package ie.por.thirdplace2.ui.screens.details
 
 
+import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -40,11 +41,11 @@ constructor(private val repository: FirestoreService,
         }
     }
 
-    fun updateThirdPlace(thirdPlace: ThirdPlaceModel) {
+    fun updateThirdPlace(thirdPlace: ThirdPlaceModel, uri: Uri) {
         viewModelScope.launch {
             try {
                 isLoading.value = true
-                repository.update(authService.email!!, thirdPlace)
+                repository.update(authService.email!!, thirdPlace, uri)
                 isErr.value = false
                 isLoading.value = false
             } catch (e: Exception) {

@@ -34,6 +34,12 @@ class FirestoreRepository
             .document(thirdPlaceId).get().await().toObject()
     }
 
+    override suspend fun getImage(email: String, thirdPlaceId: String): Uri? {
+        val thirdPlace = firestore.collection(THIRDPLACE_COLLECTION)
+            .document(thirdPlaceId).get().await().toObject<ThirdPlace>()
+        return Uri.parse(thirdPlace?.image)
+    }
+
     override suspend fun insert(email: String,
                                 thirdPlace: ThirdPlace, uri: Uri)
     {
@@ -47,7 +53,7 @@ class FirestoreRepository
     override suspend fun update(email: String,
                                 thirdPlace: ThirdPlace, uri: Uri)
     {
-        val updatedThirdPlace = thirdPlace.copy(email = email, image = uploadCustomPhotoUri(uri).toString())
+        val updatedThirdPlace = thirdPlace.copy(email = email, image = updatePhotoUris(email, uri).toString())
 
         firestore.collection(THIRDPLACE_COLLECTION)
             .document(thirdPlace._id)
@@ -73,6 +79,24 @@ class FirestoreRepository
             return url
         }
         return Uri.EMPTY
+    }
+
+    private suspend fun updatePhotoUris(email: String, uri: Uri) {
+
+        firestore.collection(THIRDPLACE_COLLECTION)
+            .whereEqualTo(USER_EMAIL, email)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    Timber.i("FSR Updating ID ${document.id}")
+                    firestore.collection(THIRDPLACE_COLLECTION)
+                        .document(document.id)
+                        .update("image", uri.toString())
+                }
+            }
+            .addOnFailureListener { exception ->
+                Timber.i("Error $exception")
+            }
     }
 
 }
