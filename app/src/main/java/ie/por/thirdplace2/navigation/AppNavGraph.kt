@@ -25,7 +25,8 @@ fun NavHostProvider(
     modifier: Modifier,
     navController: NavHostController,
     startDestination: AppDestination,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    permissions: Boolean
 ) {
     NavHost(
         navController = navController,
@@ -54,7 +55,7 @@ fun NavHostProvider(
 
         //Map screen
         composable(route = Map.route) {
-            MapScreen()
+            MapScreen(permissions = permissions)
         }
 
         //About screen

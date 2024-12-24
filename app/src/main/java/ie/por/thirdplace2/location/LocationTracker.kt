@@ -43,4 +43,5 @@ class LocationTracker (
         awaitClose {
             locationClient.removeLocationUpdates(locationCallback)
         }
-    }}
+    }
+}
