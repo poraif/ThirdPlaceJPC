@@ -15,6 +15,7 @@ import ie.por.thirdplace2.ui.screens.details.DetailsScreen
 import ie.por.thirdplace2.ui.screens.home.HomeScreen
 import ie.por.thirdplace2.ui.screens.list.ListScreen
 import ie.por.thirdplace2.ui.screens.login.LoginScreen
+import ie.por.thirdplace2.ui.screens.map.MapScreen
 import ie.por.thirdplace2.ui.screens.profile.ProfileScreen
 import ie.por.thirdplace2.ui.screens.register.RegisterScreen
 
@@ -49,6 +50,11 @@ fun NavHostProvider(
                     navController.navigateToThirdPlaceEdit(thirdPlaceId)
                 },
             )
+        }
+
+        //Map screen
+        composable(route = Map.route) {
+            MapScreen()
         }
 
         //About screen
