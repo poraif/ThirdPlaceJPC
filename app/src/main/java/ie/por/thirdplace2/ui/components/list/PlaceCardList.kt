@@ -1,5 +1,6 @@
 package ie.por.thirdplace2.ui.components.list
 
+import android.net.Uri
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -28,7 +29,7 @@ internal fun PlaceCardList(
                 title = thirdPlace.title,
                 type = thirdPlace.type,
                 amenities = thirdPlace.amenities,
-                image = thirdPlace.image,
+                image = Uri.parse(thirdPlace.image),
                 onClickDelete = { onDeletePlace(thirdPlace) },
                 onClickThirdPlaceDetails = { onClickThirdPlaceDetails(thirdPlace.id) }
 //                onRefreshList = { onRefreshList()
