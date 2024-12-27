@@ -17,8 +17,7 @@ internal fun PlaceCardList(
     thirdPlaces: List<ThirdPlaceModel>,
     modifier: Modifier = Modifier,
     onDeletePlace: (ThirdPlaceModel) -> Unit,
-    onClickThirdPlaceDetails: (Int) -> Unit,
-//    onRefreshList: () -> Unit,
+    onClickThirdPlaceDetails: (String) -> Unit
 ) {
     LazyColumn {
         items(
@@ -31,8 +30,7 @@ internal fun PlaceCardList(
                 amenities = thirdPlace.amenities,
                 image = Uri.parse(thirdPlace.image),
                 onClickDelete = { onDeletePlace(thirdPlace) },
-                onClickThirdPlaceDetails = { onClickThirdPlaceDetails(thirdPlace.id) }
-//                onRefreshList = { onRefreshList()
+                onClickThirdPlaceDetails = { onClickThirdPlaceDetails(thirdPlace._id) }
             )
         }
     }
@@ -49,7 +47,6 @@ fun PlaceCardListPreview() {
             fakePlaces.toMutableStateList(),
             onDeletePlace = {},
             onClickThirdPlaceDetails = { }
-//            onRefreshList = { }
         )
     }
 }

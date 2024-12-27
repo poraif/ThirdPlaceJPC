@@ -29,7 +29,7 @@ import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 
 @Composable
 fun ListScreen(modifier: Modifier = Modifier,
-               onClickThirdPlaceDetails: (Int) -> Unit,
+               onClickThirdPlaceDetails: (String) -> Unit,
                   listViewModel: ListViewModel = hiltViewModel()) {
 
     val thirdPlaces = listViewModel.uiThirdPlaces.collectAsState().value

@@ -12,6 +12,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +29,7 @@ import ie.por.thirdplace2.R
 import ie.por.thirdplace2.data.ThirdPlaceModel
 import ie.por.thirdplace2.ui.screens.add.AddViewModel
 import ie.por.thirdplace2.ui.screens.list.ListViewModel
+import ie.por.thirdplace2.ui.screens.map.MapViewModel
 import timber.log.Timber
 
 @Composable
@@ -36,29 +38,38 @@ fun AddThirdPlaceButton(
     modifier: Modifier = Modifier,
     thirdPlace: ThirdPlaceModel,
     addViewModel: AddViewModel = hiltViewModel(),
-    listViewModel: ListViewModel = hiltViewModel()
+    listViewModel: ListViewModel = hiltViewModel(),
+    mapViewModel: MapViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val thirdPlaces = listViewModel.uiThirdPlaces.collectAsState().value
     val title = stringResource(R.string.hint_placeTitle)
     val description = ""
-    val amenities = intArrayOf(0, 1)
+    val amenities = emptyList<String>()
     val type = ""
     val image = Uri.EMPTY
-    val lat = 0.0
-    val lng = 0.0
-    val zoom = 0
 
     val isError = addViewModel.isErr.value
     val error = addViewModel.error.value
-//    val isLoading = addViewModel.isLoading.value
-//
-//    if (isLoading) ShowLoader("Trying to add a place...")
+    val locationLatLng = mapViewModel.currentLatLng.collectAsState().value
+
+    LaunchedEffect(mapViewModel.currentLatLng){
+        mapViewModel.getLocationUpdates()
+    }
+
+    Timber.i("third place -  lat/Lng: $locationLatLng ")
+
 
     Row {
         Button(
             onClick = {
-                addViewModel.insert(thirdPlace)
+                val thirdPlaceLatLng = thirdPlace.copy(
+                    latitude = locationLatLng.latitude,
+                    longitude = locationLatLng.longitude
+                )
+                addViewModel.insert(
+                    thirdPlaceLatLng, image
+                )
                 Timber.i("Place added : $thirdPlace")
                 Timber.i("List of places info : ${thirdPlaces.toList()}")
             },

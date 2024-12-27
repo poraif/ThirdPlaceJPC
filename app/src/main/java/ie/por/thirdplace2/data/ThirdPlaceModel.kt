@@ -1,9 +1,7 @@
 package ie.por.thirdplace2.data
 
-import androidx.room.Entity
 import com.google.firebase.firestore.DocumentId
 
-@Entity
 data class ThirdPlaceModel(
     @DocumentId val _id: String = "N/A",
     var title: String = "",
@@ -15,7 +13,6 @@ data class ThirdPlaceModel(
     val longitude: Double = 0.0,
     var email: String = "peadar@email.com"
             )
-
 
 val fakePlaces = List(30) { i ->
     ThirdPlaceModel(

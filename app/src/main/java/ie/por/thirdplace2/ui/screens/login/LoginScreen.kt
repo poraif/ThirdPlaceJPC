@@ -31,6 +31,7 @@ import ie.por.thirdplace2.firebase.auth.Response
 import ie.por.thirdplace2.navigation.Home
 import ie.por.thirdplace2.navigation.Login
 import ie.por.thirdplace2.ui.components.general.ButtonComponent
+import ie.por.thirdplace2.ui.components.general.GoogleSignInButtonComponent
 import ie.por.thirdplace2.ui.components.general.HeadingLogoComponent
 import ie.por.thirdplace2.ui.components.general.HeadingTextComponent
 import ie.por.thirdplace2.ui.components.general.MyTextFieldComponent

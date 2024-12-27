@@ -1,6 +1,7 @@
 package ie.por.thirdplace2.ui.screens.details
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -34,9 +35,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import ie.por.thirdplace2.ui.components.details.DetailsHeader
 import ie.por.thirdplace2.ui.components.details.ReadOnlyTextField
+import ie.por.thirdplace2.ui.components.general.ShowImagePicker
 import ie.por.thirdplace2.ui.components.general.ShowLoader
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -52,12 +55,13 @@ fun DetailsScreen(
     val errorEmptyType = "Please select a type of place from the options"
 
     var text by rememberSaveable { mutableStateOf("") }
+    var image by rememberSaveable { mutableStateOf("") }
+    var uri by rememberSaveable { mutableStateOf(Uri.EMPTY) }
     var onTitleChanged by rememberSaveable { mutableStateOf(false) }
     var onDescriptionChanged by rememberSaveable { mutableStateOf(false) }
     var onTypeChanged by rememberSaveable { mutableStateOf(false) }
     var onAmenitiesChanged by rememberSaveable { mutableStateOf(false) }
     var onImageChanged by rememberSaveable { mutableStateOf(false) }
-    var onLocationChanged by rememberSaveable { mutableStateOf(false) }
 
     var isEmptyError by rememberSaveable { mutableStateOf(false) }
     var titleShortError by rememberSaveable { mutableStateOf(false) }
@@ -187,11 +191,19 @@ fun DetailsScreen(
                 ReadOnlyTextField(value = thirdPlace.amenities.toString(),
                     label = "Amenities")
 
+                //Image
+                image = thirdPlace.image
+                ShowImagePicker(
+                    onImageChanged = {
+                        image = it.toString()
+                    }
+                )
+
                 Spacer(modifier.height(height = 48.dp))
 
                 Button(
                     onClick = {
-                        detailViewModel.updateThirdPlace(thirdPlace)
+                        detailViewModel.updateThirdPlace(thirdPlace, image.toUri())
                         onTitleChanged = false
                         onDescriptionChanged = false
                     },

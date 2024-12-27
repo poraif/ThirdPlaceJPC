@@ -82,17 +82,6 @@ dependencies {
     //ViewModel
     implementation(libs.androidx.lifecycle.viewmodel.savedstate)
 
-    //Room
-    implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
-    ksp(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
-
-    //Retrofit
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.gson)
-
     //Google Services
     implementation(libs.play.services.auth)
 

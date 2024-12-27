@@ -14,5 +14,6 @@ interface FirestoreService {
     suspend fun get(email: String, thirdPlaceId: String) : ThirdPlace?
     suspend fun insert(email: String, thirdPlace: ThirdPlace, uri: Uri)
     suspend fun update(email: String, thirdPlace: ThirdPlace, uri: Uri)
+    suspend fun getImage(email: String, thirdPlaceId: String) : Uri?
     suspend fun delete(email: String, thirdPlaceId: String)
 }

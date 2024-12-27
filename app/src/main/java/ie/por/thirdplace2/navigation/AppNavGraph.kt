@@ -47,7 +47,7 @@ fun NavHostProvider(
         composable(route = List.route) {
             ListScreen(modifier = modifier,
                 onClickThirdPlaceDetails = {
-                        thirdPlaceId : Int ->
+                        thirdPlaceId : String ->
                     navController.navigateToThirdPlaceEdit(thirdPlaceId)
                 },
             )
@@ -106,6 +106,6 @@ fun NavHostProvider(
     }
 }
 
-private fun NavController.navigateToThirdPlaceEdit(thirdPlaceId: Int) {
+private fun NavController.navigateToThirdPlaceEdit(thirdPlaceId: String) {
     this.navigate("edit/$thirdPlaceId")
 }
