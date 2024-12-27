@@ -41,7 +41,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
@@ -66,9 +65,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ie.por.thirdplace2.R
 import ie.por.thirdplace2.data.rules.Constants.SIGN_IN_WITH_GOOGLE
+import ie.por.thirdplace2.ui.theme.ColorSecondary
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
-import ie.por.thirdplace2.ui.theme.endGradientColor
-import ie.por.thirdplace2.ui.theme.startGradientColor
 
 @Preview
 @Composable
@@ -101,12 +99,7 @@ fun GoogleSignInButtonComponent(onButtonClicked: () -> Unit) {
                 .fillMaxWidth()
                 .heightIn(48.dp)
                 .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(
-                            startGradientColor,
-                            endGradientColor,
-                        )
-                    ),
+                    color = ColorSecondary,
                     shape = RoundedCornerShape(50.dp)
                 ),
             contentAlignment = Alignment.Center
@@ -388,12 +381,7 @@ fun ButtonComponent(value: String, onButtonClicked: () -> Unit, isEnabled: Boole
                 .fillMaxWidth()
                 .heightIn(48.dp)
                 .background(
-                    brush = Brush.horizontalGradient(
-                        colors = listOf(
-                            endGradientColor,
-                            startGradientColor,
-                        )
-                    ),
+                    color = ColorSecondary,
                     shape = RoundedCornerShape(50.dp)
                 ),
             contentAlignment = Alignment.Center

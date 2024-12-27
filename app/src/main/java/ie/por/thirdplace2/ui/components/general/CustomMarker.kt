@@ -15,38 +15,32 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
-import ie.por.thirdplace2.ui.theme.mEndGradientColor
-import ie.por.thirdplace2.ui.theme.mStartGradientColor
 
 @Composable
-fun CustomMarker() {
+fun CustomMarker(markerColor: Color) {
     Box(
         modifier = Modifier
             .height(34.dp)
             .width(30.dp)
     ) {
-        Box(modifier = Modifier
-            .height(30.dp)
-            .width(30.dp)
-            .rotate(45f)
-            .clip(RoundedCornerShape(topStart = 15.dp,
-                topEnd = 15.dp, bottomStart = 15.dp,
-                bottomEnd = 1.dp))
-            .border(
-                2.dp,
-                color = Color.White,
-                shape = RoundedCornerShape(topStart = 15.dp,
-                    topEnd = 15.dp, bottomStart = 15.dp,
-                    bottomEnd = 1.dp)
-            )
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        mStartGradientColor,
-                        mEndGradientColor,
+        Box(
+            modifier = Modifier
+                .height(30.dp)
+                .width(30.dp)
+                .rotate(45f)
+                .clip(RoundedCornerShape(topStart = 15.dp, topEnd = 15.dp, bottomStart = 15.dp, bottomEnd = 1.dp))
+                .border(
+                    2.dp,
+                    color = Color.White,
+                    shape = RoundedCornerShape(topStart = 15.dp, topEnd = 15.dp, bottomStart = 15.dp, bottomEnd = 1.dp)
+                )
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            markerColor
+                        )
                     )
                 )
-            ),
         )
     }
 }
@@ -55,6 +49,6 @@ fun CustomMarker() {
 @Composable
 fun CustomMarkerPreview() {
     Thirdplace2Theme {
-     CustomMarker()
+     CustomMarker(markerColor = Color.Red)
     }
 }
