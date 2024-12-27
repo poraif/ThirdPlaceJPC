@@ -181,7 +181,7 @@ fun HeadingLogoComponent() {
                 .fillMaxWidth()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.login_homer),
+                painter = painterResource(id = R.drawable.logo_motif),
                 contentDescription = "rose image",
                 modifier = Modifier
                     .size(180.dp)

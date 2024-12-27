@@ -3,9 +3,11 @@ package ie.por.thirdplace2.ui.screens.add
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,7 +27,6 @@ import ie.por.thirdplace2.ui.components.add.TypeRadioButtonGroup
 import ie.por.thirdplace2.ui.components.general.ShowImagePicker
 import ie.por.thirdplace2.ui.screens.list.ListViewModel
 
-
 @Composable
 fun AddScreen(modifier: Modifier = Modifier, listViewModel: ListViewModel = hiltViewModel()) {
     var title by remember { mutableStateOf("") }
@@ -34,61 +35,54 @@ fun AddScreen(modifier: Modifier = Modifier, listViewModel: ListViewModel = hilt
     var amenities by remember { mutableStateOf(emptyList<String>()) }
     var image by remember { mutableStateOf(Uri.EMPTY) }
 
-    Column {
-        Column(
-            modifier = modifier.padding(
-                start = 24.dp,
-                end = 24.dp
-            ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(30.dp),
-        ) {
-            AddPlaceHeader()
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            )
-            {
-                TitleInput(
-                    modifier = modifier,
-                    onTitleChange = { title = it }
-                )
-                Spacer(modifier.weight(1f))
-                DescriptionInput(
-                    modifier = modifier,
-                    onDescriptionChange = { description = it }
-                )
-                Spacer(modifier.weight(1f))
-                TypeRadioButtonGroup(
-                    modifier = modifier,
-                    onPlaceTypeChange = { type = it }
-                )
-                Spacer(modifier.weight(1f))
-                AmenitiesCheckBoxGroup(
-                    onAmenitiesChange = { updatedAmenities ->
-                        amenities = updatedAmenities
-                    }
-                )
-                Spacer(modifier.weight(1f))
-                ShowImagePicker(
-                    onImageChanged = {
-                        image = it
-                    }
-                )
-                Spacer(modifier.weight(1f))
-                AddThirdPlaceButton(
-                    modifier = modifier,
-                    thirdPlace = ThirdPlaceModel(
-                        title = title,
-                        description = description,
-                        type = type,
-                        amenities = amenities,
-                        image = image.toString()
-                    )
-                )
+    val scrollState = rememberScrollState()
 
+    Column(
+        modifier = modifier
+            .padding(24.dp)
+            .fillMaxSize()
+            .verticalScroll(scrollState),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AddPlaceHeader()
 
+        TitleInput(
+            modifier = Modifier.fillMaxWidth(),
+            onTitleChange = { title = it }
+        )
+
+        DescriptionInput(
+            modifier = Modifier.fillMaxWidth(),
+            onDescriptionChange = { description = it }
+        )
+
+        TypeRadioButtonGroup(
+            modifier = Modifier.fillMaxWidth(),
+            onPlaceTypeChange = { type = it }
+        )
+
+        AmenitiesCheckBoxGroup(
+            onAmenitiesChange = { updatedAmenities ->
+                amenities = updatedAmenities
             }
-        }
+        )
 
+        ShowImagePicker(
+            onImageChanged = {
+                image = it
+            }
+        )
+
+        AddThirdPlaceButton(
+            modifier = Modifier.fillMaxWidth(),
+            thirdPlace = ThirdPlaceModel(
+                title = title,
+                description = description,
+                type = type,
+                amenities = amenities,
+                image = image.toString()
+            )
+        )
     }
 }

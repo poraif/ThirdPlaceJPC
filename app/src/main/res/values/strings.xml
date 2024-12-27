@@ -127,5 +127,6 @@
     <string name="confirm_delete">Are you sure you want to delete this place?</string>
     <string name="confirm_delete_message">This action cannot be undone.</string>
     <string name="empty_list">Empty list - add your places</string>
+    <string name="about_message">Third Place is an app to connect people with third places - where communities and individuals can come together outside of the workplace and home.</string>
 
 </resources>
