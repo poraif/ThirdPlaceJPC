@@ -9,6 +9,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -22,10 +23,12 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerComposable
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.google.maps.android.compose.rememberMarkerState
-import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 import ie.por.thirdplace2.ui.components.general.CustomMarker
 import ie.por.thirdplace2.ui.screens.list.ListViewModel
+import ie.por.thirdplace2.ui.theme.ColorPrimary
+import ie.por.thirdplace2.ui.theme.ColorSecondary
+import ie.por.thirdplace2.ui.theme.ColorSurface
+import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 import timber.log.Timber
 
 @Composable
@@ -55,16 +58,28 @@ fun MapScreen(
     val cameraPositionState = rememberCameraPositionState {
         position = CameraPosition.fromLatLngZoom(currentLocation, 14f)
     }
-    if(permissions)
-        LaunchedEffect(currentLocation){
+    if (permissions) {
+        LaunchedEffect(currentLocation) {
             mapViewModel.getLocationUpdates()
             cameraPositionState.animate(CameraUpdateFactory.newLatLng(currentLocation))
             cameraPositionState.position = CameraPosition.fromLatLngZoom(currentLocation, 14f)
         }
+    }
 
     Timber.i("MAP LAT/LNG COORDINATES $currentLocation ")
 
-    Column{
+    fun getMarkerColor(type: String): Color {
+        return when (type) {
+            "Outdoors" -> ColorPrimary
+            "Cultural" -> ColorSecondary
+            "Food+drink" -> ColorSurface
+            "Activity" -> Color.Yellow
+            "Community space" -> Color.Cyan
+            else -> Color.Gray
+        }
+    }
+
+    Column {
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
@@ -77,12 +92,15 @@ fun MapScreen(
                 snippet = "This is My Current Location"
             )
             thirdPlaces.forEach {
-                val position = LatLng(it.latitude,it.longitude)
+                val position = LatLng(it.latitude, it.longitude)
+                val markerColor = getMarkerColor(it.type)
                 MarkerComposable(
                     state = MarkerState(position = position),
                     title = it.title,
                     snippet = it.description
-                ) { CustomMarker() }
+                ) {
+                    CustomMarker(markerColor = markerColor)
+                }
             }
         }
     }

@@ -37,7 +37,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale.Companion.Crop
@@ -49,9 +48,8 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import ie.por.thirdplace2.R
+import ie.por.thirdplace2.ui.theme.ColorPrimary
 import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
-import ie.por.thirdplace2.ui.theme.endGradientColor
-import ie.por.thirdplace2.ui.theme.startGradientColor
 
 @Composable
 fun PlaceCard(
@@ -61,7 +59,6 @@ fun PlaceCard(
     image: Uri,
     onClickDelete: () -> Unit,
     onClickThirdPlaceDetails: () -> Unit
-//    onRefreshList: () -> Unit,
 ) {
     Card(
         border = BorderStroke(1.dp, Color.Black),
@@ -84,7 +81,6 @@ private fun PlaceCardContent(
     image: Uri,
     onClickDelete: () -> Unit,
     onClickThirdPlaceDetails: () -> Unit
-//    onRefreshList: () -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
     var showDeleteConfirmDialog by remember { mutableStateOf(false) }
@@ -99,12 +95,7 @@ private fun PlaceCardContent(
                 )
             )
             .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        startGradientColor,
-                        endGradientColor,
-                    )
-                )
+                color = ColorPrimary
             )
     ) {
         Column(
@@ -216,7 +207,6 @@ fun PlaceCardPreview() {
             image = Uri.parse("https://picsum.photos/300/200"),
             onClickDelete = { },
             onClickThirdPlaceDetails = {}
-//            onRefreshList = {}
         )
     }
 }

@@ -44,20 +44,22 @@ import ie.por.thirdplace2.ui.theme.Thirdplace2Theme
 fun LoginScreen(
     onLogin: () -> Unit = {},
     navController: NavController,
-    loginViewModel: LoginViewModel = hiltViewModel()) {
-
+    loginViewModel: LoginViewModel = hiltViewModel()
+) {
     var isEnabled by remember { mutableStateOf(false) }
     val loginFlow = loginViewModel.loginFlow.collectAsState()
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
         Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White)
-                .padding(28.dp)
+                .padding(28.dp),
+            color = Color.White
         ) {
             Column(
                 modifier = Modifier
@@ -68,7 +70,8 @@ fun LoginScreen(
                 HeadingLogoComponent()
                 Spacer(modifier = Modifier.height(20.dp))
 
-                MyTextFieldComponent(labelValue = stringResource(id = R.string.email),
+                MyTextFieldComponent(
+                    labelValue = stringResource(id = R.string.email),
                     painterResource(id = R.drawable.message),
                     onTextChanged = {
                         loginViewModel.onEvent(LoginUIEvent.EmailChanged(it))
@@ -78,7 +81,7 @@ fun LoginScreen(
 
                 PasswordTextFieldComponent(
                     labelValue = stringResource(id = R.string.password),
-                    painterResource(id = R.drawable.lock),
+                    painterResource = painterResource(id = R.drawable.lock),
                     onTextSelected = {
                         loginViewModel.onEvent(LoginUIEvent.PasswordChanged(it))
                     },
@@ -133,6 +136,7 @@ fun LoginScreen(
         }
     }
 }
+
 
 @Preview
 @Composable

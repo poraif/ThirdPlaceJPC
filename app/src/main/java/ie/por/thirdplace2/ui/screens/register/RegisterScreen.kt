@@ -3,7 +3,12 @@ package ie.por.thirdplace2.ui.screens.register
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -19,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import ie.por.thirdplace2.R
 import ie.por.thirdplace2.firebase.auth.Response
 import ie.por.thirdplace2.navigation.Home
 import ie.por.thirdplace2.navigation.Register
@@ -32,31 +38,28 @@ import ie.por.thirdplace2.ui.components.general.MyTextFieldComponent
 import ie.por.thirdplace2.ui.components.general.NormalTextComponent
 import ie.por.thirdplace2.ui.components.general.PasswordTextFieldComponent
 import ie.por.thirdplace2.ui.components.general.ShowLoader
-import ie.por.thirdplace2.R
-import ie.por.thirdplace2.ui.screens.register.RegisterUIEvent
-import ie.por.thirdplace2.ui.screens.register.RegisterViewModel
 
 @Composable
 fun RegisterScreen(
     onRegister: () -> Unit = {},
     navController: NavController,
-    registerViewModel: RegisterViewModel = hiltViewModel()) {
-
+    registerViewModel: RegisterViewModel = hiltViewModel()
+) {
     val registerFlow = registerViewModel.signupFlow.collectAsState()
 
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
         contentAlignment = Alignment.Center
     ) {
-
         Surface(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White)
-                .padding(28.dp)
+                .padding(28.dp),
+            color = Color.White
         ) {
             Column(modifier = Modifier.fillMaxSize()) {
-
                 HeadingTextComponent(value = stringResource(id = R.string.button_signup))
                 Spacer(modifier = Modifier.height(20.dp))
                 HeadingLogoComponent()
@@ -85,13 +88,13 @@ fun RegisterScreen(
                     },
                     errorStatus = registerViewModel.registrationUIState.value.passwordError
                 )
-                CheckboxComponent(value = stringResource(id = R.string.terms_and_conditions),
+                CheckboxComponent(
+                    value = stringResource(id = R.string.terms_and_conditions),
                     onTextSelected = {},
                     onCheckedChange = {
                         registerViewModel.onEvent(RegisterUIEvent.PrivacyPolicyCheckBoxClicked(it))
                     }
                 )
-
                 Spacer(modifier = Modifier.height(20.dp))
                 ButtonComponent(
                     value = stringResource(id = R.string.register),
@@ -105,7 +108,7 @@ fun RegisterScreen(
             }
         }
 
-        if(registerViewModel.signUpInProgress.value) {
+        if (registerViewModel.signUpInProgress.value) {
             CircularProgressIndicator()
         }
     }
@@ -124,9 +127,7 @@ fun RegisterScreen(
             is Response.Success -> {
                 LaunchedEffect(Unit) {
                     navController.navigate(Home.route) {
-                        popUpTo(Register.route) {
-                            inclusive = true
-                        }
+                        popUpTo(Register.route) { inclusive = true }
                     }
                 }
             }

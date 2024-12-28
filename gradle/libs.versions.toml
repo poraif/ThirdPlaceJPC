@@ -17,8 +17,8 @@ numberPicker = "1.0.3"
 compose-plugin = "1.6.20-dev1646"
 timber = "5.0.1"
 
-hiltAndroid = "2.53.1"
-hiltAndroidCompiler = "2.53.1"
+hiltAndroid = "2.54"
+hiltAndroidCompiler = "2.54"
 hiltNavigationCompose = "1.2.0"
 ksp = "2.0.0-1.0.21"
 
@@ -30,13 +30,13 @@ firebaseAuthKtx = "23.1.0"
 firebaseFirestore = "25.1.1"
 googleid = "1.1.1"
 
-coilCompose = "2.6.0"
+coilCompose = "2.7.0"
 firebaseStorage = "21.0.1"
 
 playServicesLocation = "21.3.0"
 playServicesMaps = "19.0.0"
-mapsCompose = "4.1.1"
-accompanistPermissions = "0.24.13-rc"
+mapsCompose = "6.4.0"
+accompanistPermissions = "0.37.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }

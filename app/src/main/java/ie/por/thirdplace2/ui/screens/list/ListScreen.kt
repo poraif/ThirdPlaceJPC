@@ -37,12 +37,6 @@ fun ListScreen(modifier: Modifier = Modifier,
     val isLoading = listViewModel.isLoading.value
     val error = listViewModel.error.value
 
-/*
-    LaunchedEffect(Unit) {
-        listViewModel.getThirdPlaces()
-    }
-*/
-
     Column {
         Column(
             modifier = modifier.padding(
@@ -52,8 +46,6 @@ fun ListScreen(modifier: Modifier = Modifier,
         ) {
             if(isLoading) ShowLoader("Loading third places...")
             PlaceListHeader()
-/*            if(!isErr)
-                ShowRefreshList(onClick = { listViewModel.getThirdPlaces() })*/
             if (thirdPlaces.isEmpty() && !isErr)
                 Centre(Modifier.fillMaxSize()) {
                     Text(color = MaterialTheme.colorScheme.secondary,
@@ -71,7 +63,6 @@ fun ListScreen(modifier: Modifier = Modifier,
                     onDeletePlace = { thirdPlace: ThirdPlaceModel ->
                         listViewModel.deleteThirdPlace(thirdPlace)
                     },
-                    // onRefreshList = { reportViewModel.getDonations() }
                 )
             }
             if (isErr) {
@@ -122,7 +113,6 @@ fun PreviewListScreen(modifier: Modifier = Modifier,
                     thirdPlaces = thirdPlaces,
                     onDeletePlace = {},
                     onClickThirdPlaceDetails = { }
-//                    onRefreshList = { }
                 )
         }
     }
