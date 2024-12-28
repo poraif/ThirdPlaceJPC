@@ -4,7 +4,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
-// Define the Light Color Scheme with specified colors
 private val LightColorScheme = lightColorScheme(
     primary = ColorPrimary,
     onPrimary = ColorOnPrimary,
@@ -19,7 +18,6 @@ private val LightColorScheme = lightColorScheme(
     onSurface = ColorOnSurface
 )
 
-// Theme Definition
 @Composable
 fun Thirdplace2Theme(
     content: @Composable () -> Unit

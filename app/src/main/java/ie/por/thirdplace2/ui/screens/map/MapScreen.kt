@@ -23,6 +23,7 @@ import com.google.maps.android.compose.Marker
 import com.google.maps.android.compose.MarkerComposable
 import com.google.maps.android.compose.MarkerState
 import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.rememberMarkerState
 import ie.por.thirdplace2.ui.components.general.CustomMarker
 import ie.por.thirdplace2.ui.screens.list.ListViewModel
 import ie.por.thirdplace2.ui.theme.ColorPrimary
@@ -87,7 +88,7 @@ fun MapScreen(
             properties = properties
         ) {
             Marker(
-                state = MarkerState(position = currentLocation),
+                state = rememberMarkerState(position = currentLocation),
                 title = "Current Location",
                 snippet = "This is My Current Location"
             )
