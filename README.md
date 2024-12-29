@@ -1,4 +1,4 @@
-# Third Place
+# Third Place - Jetpack Compose
 
 Android map-based app to view, add, filter and share third places - typically free common areas outside the home or workplace.
 This is the refactored JetPack Compose version. The first version can be found here: https://github.com/poraif/thirdplace 
