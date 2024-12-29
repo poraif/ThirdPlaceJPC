@@ -1,12 +1,14 @@
 package ie.por.thirdplace2.ui.screens.map
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ie.por.thirdplace2.location.LocationService
+import ie.por.thirdplace2.ui.theme.ColorPrimary
+import ie.por.thirdplace2.ui.theme.ColorSecondary
+import ie.por.thirdplace2.ui.theme.ColorSurface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,6 +32,17 @@ class MapViewModel @Inject constructor(
 
     private fun setCurrentLatLng(latLng: LatLng) {
         _currentLatLng.value = latLng
+    }
+
+    fun getMarkerColor(type: String): Color {
+        return when (type) {
+            "Outdoors" -> ColorPrimary
+            "Cultural" -> ColorSecondary
+            "Food+drink" -> ColorSurface
+            "Activity" -> Color.Yellow
+            "Community space" -> Color.Cyan
+            else -> Color.Gray
+        }
     }
 
     fun getLocationUpdates() {
